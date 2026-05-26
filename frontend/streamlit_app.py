@@ -86,15 +86,7 @@ with st.sidebar:
     st.markdown("### 👤 Account")
 
     from frontend.services import supabase_client
-
-    if st.session_state.access_token:
-        # Signed-in state: show email + sign-out button.
-        st.caption(f"Signed in as **{st.session_state.user_email}**")
-        if st.button("Sign out", use_container_width=True):
-            supabase_client.sign_out()
-            for k in ("access_token", "refresh_token", "user_id", "user_email"):
-                st.session_state[k] = None
-            st.rerun()
+    
     else:
         # Signed-out state: tabs for sign-in vs sign-up + Google OAuth button.
         if st.session_state.auth_error:
