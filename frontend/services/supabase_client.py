@@ -105,9 +105,14 @@ def google_oauth_url() -> Dict[str, Any]:
         print("REDIRECT URL USED:", OAUTH_REDIRECT_URL)
 
         resp = get_client().auth.sign_in_with_oauth({
-            'provider': 'google',
-            'options': {
-                'redirect_to': 'http://localhost:8501'
+            "provider": "google",
+            "options": {
+                "redirect_to": OAUTH_REDIRECT_URL,
+                "skip_browser_redirect": False,
+                "query_params": {
+                    "access_type": "offline",
+                    "prompt": "consent",
+                },
             },
         })
 
